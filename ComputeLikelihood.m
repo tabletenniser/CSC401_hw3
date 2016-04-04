@@ -1,10 +1,14 @@
 function new_likelihood = ComputeLikelihood (data, mean, covariance, prior)
-%COMPUTE Summary of this function goes here
+
 %   Detailed explanation goes here
-%   data: <array<aaray>> - T data points, each with d dimensions
-%   mean: <array<array>> - the mean of M clusters
-%   covariance: <array<array>> - the covariance matrix of M clusters
-%   prior: <array> - the prior of M clusters
+%   data: <array<aaray>> n_data x n_dim
+%               T data points, each with d dimensions
+%   mean: <array<array>> n_cluster x n_dim
+%               the mean of M clusters
+%   covariance: <array<array>> n_cluster x n_dim
+%               the diagnal of covariance matrix of M clusters
+%   prior: <array> n_cluster
+%               the prior of M clusters
 
 n_cluster = length(mean);
 tmp = size(data);
