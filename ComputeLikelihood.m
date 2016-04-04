@@ -2,7 +2,7 @@ function new_likelihood = ComputeLikelihood (data, mean, covariance, prior)
 %COMPUTE Summary of this function goes here
 %   Detailed explanation goes here
 %   data: <array<aaray>> - T data points, each with d dimensions
-%   mean: <array> - the mean of M clusters
+%   mean: <array<array>> - the mean of M clusters
 %   covariance: <array<array>> - the covariance matrix of M clusters
 %   prior: <array> - the prior of M clusters
 
@@ -19,10 +19,12 @@ covariance_prod = sqrt(prod(covariance, 2)) * (2 * pi) ^ (n_dim/2);
 % calculate new covariance mat for all clusters
 for data_idx=1:n_data
     sample = data(data_idx, :);
-    covariance_mat = (sample - mean).^2;
     
     % make n_cluster copies of this
-    covariance_mat = repmat(covariance_mat, n_cluster, 1);
+    covariance_mat = repmat(sample, n_cluster, 1);
+    
+    % save the result
+    covariance_mat = (covariance_mat - mean) .^ 2;
     
     % element-wise divide by the covariance mat
     covariance_mat = covariance_mat ./ covariance;
