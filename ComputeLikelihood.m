@@ -48,4 +48,4 @@ softmax = softmax ./ repmat(sum(softmax, 2), 1, n_dim);
 
 % output
 new_likelihood = softmax;
-return
+end
