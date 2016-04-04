@@ -45,11 +45,11 @@ for data_idx=1:n_data
 end
 
 % softmax step 1 => w_m*b_m(x_t)
-softmax = b .* repmat(prior, n_data, 1);
+softmx = b .* repmat(prior, n_data, 1);
 
 % softmax step 2 => normalize 
-softmax = softmax ./ repmat(sum(softmax, 2), 1, n_dim);
+softmx = softmx ./ repmat(sum(softmx, 2), 1, n_dim);
 
 % output
-new_likelihood = softmax;
+new_likelihood = softmx;
 end
