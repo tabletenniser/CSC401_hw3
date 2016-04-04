@@ -15,3 +15,32 @@ function gmms = gmmTrain( dir_train, max_iter, epsilon, M )
 %                                          is a vector
 %                            gmm.cov     : DxDxM matrix of covariances. 
 %                                          (:,:,i) is for i^th mixture
+
+speakers=dir(dir_train);
+%gmms = {};
+gmms = cell(1,33);
+index = 1;
+
+% Iterate through all speaker directories
+%for i=1:size(speakers)
+for i=1:4
+    if speakers(i).name(1) == '.'
+        continue
+    end
+    gmms{index} = struct();
+    gmms{index}.name = speakers(i).name;
+    speaker_mfccs = dir([dir_train, filesep, gmms{index}.name, filesep, '*mfcc']);
+    
+    % Iterate through all .mfcc files for the current speaker
+    data = [];
+    for j = 1:size(speaker_mfccs)
+       fprintf('Loading file: %s %s %s\n', dir_train, speakers(i).name, speaker_mfccs(j).name);
+       cur_mfcc_data = load(fullfile(dir_train, speakers(i).name, speaker_mfccs(j).name));
+       data = [data; cur_mfcc_data];
+    end
+    disp(size(data));
+    index = index + 1;
+end
+%disp(speakers);
+
+return
