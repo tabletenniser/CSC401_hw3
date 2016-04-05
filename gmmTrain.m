@@ -22,6 +22,7 @@ function gmms = gmmTrain( dir_train, max_iter, epsilon, M )
 
     % Iterate through all speaker directories
     for i=1:size(speakers)
+    %for i=15:15
         % Skip non-speaker directories
         if speakers(i).name(1) == '.'
             continue
@@ -43,22 +44,22 @@ function gmms = gmmTrain( dir_train, max_iter, epsilon, M )
 
         % Step #3: Initialize all parameters.
         numOfFeatures = size(data,2);
-        means = data(1:M, :);   % first 8 vectors of the data
+        means = data(M+1:2*M, :);   % first 8 vectors of the data
         %covs = repmat(eye(numOfFeatures),1,1,M);
-        covs = ones(M,numOfFeatures);
+        covs = ones(M,numOfFeatures)*1000;  % multiply 1000 to avoid NaN
         omegas = 1/M * ones(1,M);
 
         % Step #4: Iteratively applying the EM algorithm.
         cur_iter = 0;
         prev_L = -inf;
         improvement = inf;
-        while cur_iter <= max_iter && improvement >= epsilon
-            softmax = ComputeLikelihood(data, means, covs, omegas);
+        while cur_iter <= max_iter && (improvement >= epsilon || isnan(improvement))
+            [softmax, L] = ComputeLikelihood(data, means, covs, omegas);
             %disp(size(softmax));
             [omegas, means, covs] = UpdateParameters (softmax, data);
-            L = sum(log(sum(softmax)));
-            fprintf('Log probability: %g\n', L);
+            %L = sum(log(sum(softmax)));
             improvement = L - prev_L;
+            fprintf('Log probability: %g; Improvement: %g\n', L, improvement);
             prev_L = L;
             cur_iter = cur_iter + 1;
         end
@@ -74,6 +75,7 @@ function gmms = gmmTrain( dir_train, max_iter, epsilon, M )
         gmms{index}.cov = diagonal_covs;
         index = index + 1;
     end
+    save('gmms.mat', 'gmms', '-mat');
 end
 
 function [new_prior, new_mean, new_covariance] = UpdateParameters(softmx, data)
@@ -113,7 +115,7 @@ function [new_prior, new_mean, new_covariance] = UpdateParameters(softmx, data)
 end
 
 %%%%%%%%% E-step %%%%%%%%%%%
-function new_likelihood = ComputeLikelihood (data, mean, covariance, prior)
+function [softmx, L] = ComputeLikelihood (data, mean, covariance, prior)
     %   Detailed explanation goes here
     %   data: <array<aaray>> n_data x n_dim
     %               T data points, each with d dimensions
@@ -154,15 +156,14 @@ function new_likelihood = ComputeLikelihood (data, mean, covariance, prior)
 
         % save into new_likelihood
         b(data_idx, :) = transpose(covariance_mat);
+        %disp(b);
     end
-
+    
     % softmax step 1 => w_m*b_m(x_t)
     softmx = b .* repmat(prior, n_data, 1);
+    L = sum(log(sum(softmx, 2)));
     softmx_sum = sum(softmx, 2);
 
     % softmax step 2 => normalize
     softmx = softmx ./ repmat(softmx_sum, 1, n_cluster);
-
-    % output
-    new_likelihood = softmx;
 end
