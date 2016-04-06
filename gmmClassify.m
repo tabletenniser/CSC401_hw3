@@ -1,4 +1,4 @@
-function clf = gmmClassify ()
+function gmmClassify ()
     trainDir = './Training';
     testDir = './Testing';
     M = 8;
