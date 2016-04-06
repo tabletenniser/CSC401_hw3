@@ -9,9 +9,11 @@ function clf = gmmClassify ()
 
     TestingMFCCFiles = dir([testDir, filesep, '*mfcc']);
 
+    outSumFile = fopen('Predict.out', 'w');
+    fprintf(outSumFile, 'unkn_x : speaker_ID : utterance_ID\n');
     for i=1:length(TestingMFCCFiles)
-
-        fprintf('test MFCC file: %s\n', TestingMFCCFiles(i).name);
+        fname = ['unkn', int2str(i), '.lik'];
+        outputFile = fopen(fname,'w');
 
         data = load([testDir, filesep, TestingMFCCFiles(i).name]);
         logLikelihoods = zeros(length(gmms),1);
@@ -30,16 +32,22 @@ function clf = gmmClassify ()
             end
             covs = transpose(covs);
             
-            if s == 2
-                fprintf('%d', s);
-            end
             L = findLikelihood(data, means, covs, omegas);
             logLikelihoods(s,1) = L;
         end
         %disp(logLikelihoods);
         [sortedLikelihoods,sortedIndices] = sort(logLikelihoods,'descend');
-        fprintf('Top guess: %s with prob: %g\n', gmms{sortedIndices(1)}.name, sortedLikelihoods(1));
+        fprintf('%s : %s: %g\n', TestingMFCCFiles(i).name, gmms{sortedIndices(1)}.name, sortedLikelihoods(1));
+        
+        fprintf(outputFile, 'Filename: %s: \n', TestingMFCCFiles(i).name);
+        for k=1:5
+            fprintf(outputFile, '   Speaker: %s, Likelihood: %d\n', gmms{sortedIndices(k)}.name, sortedLikelihoods(k));
+        end
+        fprintf(outSumFile, '%s : %s: %s: %s\n', TestingMFCCFiles(i).name, gmms{sortedIndices(1)}.name, gmms{sortedIndices(2)}.name, gmms{sortedIndices(3)}.name);
+        
+        fclose(outputFile);
     end
+    fclose(outSumFile);
 end
 
 function L = findLikelihood(data, mean, covariance, prior)
