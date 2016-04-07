@@ -1,0 +1,23 @@
+Zexuan Wang (998851883)
+Yiming Kang (998676130)
+
+2.2
+======================
+Using 8 clusters for GMM along with a maximum of 250 iterations for the EM algorithm or per-iteration log likelihood improvement of 0.1, whichever comes first, we are able to recognize the speaker of the 15 labelled .mfcc data with 100% accuracy.
+
+2.3
+======================
+The experiment accuracy goes down as the number of components discreases. This can attribute to the fact that a GMM with few components may not fully describe the distribution of the input .mfcc data. The experimental accuracy goes up when the number of possible speakers, S decreases. This is expected because less potential speakers makes our classification task easier simply by having a smaller number of possible classes. The experiment accuracy goes down as the per-iteration log likelihood threshold episilon increases. Increasing episilon will cause the EM algorithm not finding a best setting that minimizes the log likelihood.
+1) TODO
+2) TODO
+3) TODO
+
+3.2
+======================
+Training with 3 hidden states for HMM and 8 components for GMM with a maximum of 20 iterations provides a phoneme classification accuracy of 43.98%. We then performed experiment under the following possible settings of the four paramters:
+1) Number of mixtures per state: 2 or 8
+2) Number of states per sequence: 1 or 3
+3) Amount of Training data used: 2 speakers or all 30 speakers
+4) Changes to the dimensionality of the data: all 14 dimensions or the first 5
+
+The raw experimental result goes as following:
