@@ -1,20 +1,34 @@
-curl -u 07607d3a-37e9-4ec3-a8f8-700b58161832:dT3swy0NpmV3 -X POST --header "Content-Type: application/json" --header "Accept: audio/flac" --header "Voice: en-US_LisaVoice" --data "{\"text\":\"hello world\"}" "https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize" > hello_world.flac
+lines = textread('Predict.out', '%s', 'delimiter','\n');
+n_speakers = length(fname);
 
-flac_files = dir('Testing/unkn*.flac');
-text_files = dir('Testing/unkn*.txt');
-
-if n_flac ~= n_text
-    fprintf('ERROR: Number of flac and text files are not the same %d %d\n', n_flac, n_text);
-    return
+for speaker_idx=1:n_speakers
+    line = strsplit(lines{speaker_idx});
+    
+    file_base_name = line{1};
+    gender = line{2}(1);
+    
+    fprintf('File base name is: %s, user gender is %c\n', file_base_name, gender);
+    
+    % To get around Matlab's horrible character escape mechanism, we chose
+    % to work around by having a bash script to perform all required
+    % functionalities
+    text_file_name = ['Testing/', strrep(file_base_name, 'mfcc', 'txt')];
+    flac_file_name = ['Testing/', strrep(file_base_name, 'mfcc', 'flac')];
+    save_file_name = ['TextToSpeech/', strrep(file_base_name, 'mfcc', 'flac')];
+    
+    if gender == 'M'
+        voice = 'en-US_MichaelVoice';
+    elseif gender == 'F'
+        voice = 'en-US_LisaVoice';
+    else
+        assert(0);
+    end
+    [xxx1, xxx2, text_to_speech] = textread(text_file_name, '%d %d %s', 'delimiter','\n');
+    text_to_speech = text_to_speech{:};
+        
+    cmd = ['env LD_LIBRARY_PATH="" bash onMyCommand.sh "', text_to_speech , '" ', voice , ' ', save_file_name];
+    fprintf('Executing command: %s', cmd);
+    unix(cmd);
 end
 
-total_ref_word = 0;
-total_err = 0;
-
-for file_idx = 1:n_flac
-    fprintf('File name: %s -- %s\n', flac_files(file_idx).name,  text_files(file_idx).name)
-    % Do some stuff
-    slash = char(92);
-    cmd = ['env LD_LIBRARY_PATH="" curl -u 2b78670c-c890-477b-a54b-a4caeb27ad0e:JJgGDcOVXKxB -X POST --header "Content-Type: audio/flac" --header "Transfer-Encoding: chunked" --data-binary @Testing/', flac_files(file_idx).name, ' "https://stream.watsonplatform.net/speech-to-text/api/v1/recognize?continuous=true"'];
-    [x, y] = unix(cmd);
-end
+IBM('TextToSpeech');
