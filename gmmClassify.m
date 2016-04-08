@@ -1,21 +1,28 @@
 function gmmClassify ()
     trainDir = './Training';
     testDir = './Testing';
+    testLabelFile = './Testing/TestingIDs1-15.txt';
     M = 8;
-    epsilon = 0.001;
-
-    %gmms = gmmTrain(trainDir, 10, epsilon, M);
     load('gmms.mat', 'gmms');
+    fileID = fopen(testLabelFile);
+    labels = textscan(fileID,'%s %s %s','Delimiter',':');
+    labelID = labels{1};
+    speakerIDLabels = labels{2};
+    
+    fclose(fileID);
 
-    TestingMFCCFiles = dir([testDir, filesep, '*mfcc']);
+    %TestingMFCCFiles = dir([testDir, filesep, '*mfcc']);
 
     outSumFile = fopen('Predict.out', 'w');
     fprintf(outSumFile, 'unkn_x : speaker_ID : utterance_ID\n');
-    for i=1:length(TestingMFCCFiles)
+    numCorrectLabels = 0;
+    %for i=1:length(TestingMFCCFiles)
+    for i = 1:30
+        MFCCFile = ['unkn_', int2str(i), '.mfcc'];
         fname = ['unkn', int2str(i), '.lik'];
         outputFile = fopen(fname,'w');
 
-        data = load([testDir, filesep, TestingMFCCFiles(i).name]);
+        data = load([testDir, filesep, MFCCFile]);
         logLikelihoods = zeros(length(gmms),1);
 
         % Iterate through all GMMS for each speaker and find the one with
@@ -37,17 +44,24 @@ function gmmClassify ()
         end
         %disp(logLikelihoods);
         [sortedLikelihoods,sortedIndices] = sort(logLikelihoods,'descend');
-        fprintf('%s : %s: %g\n', TestingMFCCFiles(i).name, gmms{sortedIndices(1)}.name, sortedLikelihoods(1));
-        
-        fprintf(outputFile, 'Filename: %s: \n', TestingMFCCFiles(i).name);
+        if i <= 15
+            fprintf('%d - %s : %s: %g\n', i, speakerIDLabels{i+1}, gmms{sortedIndices(1)}.name, sortedLikelihoods(1));
+            if strcmp(speakerIDLabels{i+1}, gmms{sortedIndices(1)}.name) ~= 0
+                numCorrectLabels = numCorrectLabels+1;
+            end
+        else
+            %fprintf('%d - %s : %s: %g\n', i, TestingMFCCFiles(i).name, gmms{sortedIndices(1)}.name, sortedLikelihoods(1));
+        end
+        fprintf(outputFile, 'Filename: %s: \n', MFCCFile);
         for k=1:5
             fprintf(outputFile, '   Speaker: %s, Likelihood: %d\n', gmms{sortedIndices(k)}.name, sortedLikelihoods(k));
         end
-        fprintf(outSumFile, '%s : %s: %s: %s\n', TestingMFCCFiles(i).name, gmms{sortedIndices(1)}.name, gmms{sortedIndices(2)}.name, gmms{sortedIndices(3)}.name);
+        fprintf(outSumFile, '%s : %s: %s: %s\n', MFCCFile, gmms{sortedIndices(1)}.name, gmms{sortedIndices(2)}.name, gmms{sortedIndices(3)}.name);
         
         fclose(outputFile);
     end
     fclose(outSumFile);
+    fprintf('Classification rate: %g\n', numCorrectLabels/15.0);
 end
 
 function L = findLikelihood(data, mean, covariance, prior)

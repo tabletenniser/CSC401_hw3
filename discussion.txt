@@ -7,10 +7,27 @@ Using 8 clusters for GMM along with a maximum of 250 iterations for the EM algor
 
 2.3
 ======================
-The experiment accuracy goes down as the number of components discreases. This can attribute to the fact that a GMM with few components may not fully describe the distribution of the input .mfcc data. The experimental accuracy goes up when the number of possible speakers, S decreases. This is expected because less potential speakers makes our classification task easier simply by having a smaller number of possible classes. The experiment accuracy goes down as the per-iteration log likelihood threshold episilon increases. Increasing episilon will cause the EM algorithm not finding a best setting that minimizes the log likelihood.
-1) TODO
-2) TODO
-3) TODO
+In order to benchmark the effect on the three different parameters on the classification accuracy, the ./Testing/TestingIDs1-15.txt file is read and stored as the true labeling. A set of parameters are then changed as explained below to see their effect on the classification rate.
+1) Number of components: The experiment accuracy goes down as the number of components discreases. This can attribute to the fact that a GMM with fewer components may not fully describe the distribution of the input .mfcc data, especially when the data has many modals. Set 10 iterations with episilon=0.01. Raw experiment result goes below:
+    M = 8: Classification rate = 100%
+    M = 4: Classification rate = 93.3%
+    M = 2: Classification rate = 93.3%
+    M = 1: Classification rate = 93.3%
+
+2) The experiment accuracy goes down as the per-iteration log likelihood threshold episilon increases. Increasing episilon will cause the EM algorithm to terminate before a fully converged solution is found. As a result, using a GMM model whose parameters are not fully optimized will result lower classification performance. The experiment runs at M=2 (i.e number of GMM components) and 10 iterations:
+    episilon = 0.01: Classification rate = 93.3%
+    episilon = 0.1: Classification rate = 93.3%
+    episilon = 1: Classification rate = 80%
+    episilon = 10: Classification rate = 46.7%
+
+3) Number of possible speakers: The experimental accuracy goes up when the number of possible speakers (S) decreases. This is expected because less potential speakers makes our classification task easier simply by having a smaller number of possible classes. The experiment is conducted at epsilon = 10 with M=2. Here is the raw experimental result:
+    All 30 speakers: Classification rate = 46.7%
+    12 female speakers: Classification rate = 66.7%
+However, it should be noted that a larger test dataset is required to draw any definitive conclusion as the test dataset gets smaller as we remove speakers from it and the result may not be as representable as before.
+
+1) Depending on the nature of the distribution of the data, if the data has a complicated distribution with many peaks, classification accuracy of the Gaussian mixture can be improved by having more components.
+2) If the a given test utterance has a best likelihood lower than some threshold multiply by the maximum likelihood of that that GMM, then we can conclude that the utterance comes from noe one in the training speaker list.
+3) Neural network is another popular machine learning model that is commonly used to identify the speaker, especially the recent breakthrough of recurrent neural network which can also model sequential dependencies of the data and has been recently shown to have better performance than HMM.
 
 3.2
 ======================
@@ -18,9 +35,30 @@ Training with 3 hidden states for HMM and 8 components for GMM with a maximum of
 1) Number of mixtures per state: 2 or 8
 2) Number of states per sequence: 1 or 3
 3) Amount of Training data used: 2 speakers or all 30 speakers
-4) Changes to the dimensionality of the data: all 14 dimensions or the first 5
+4) Changes to the dimensionality of the data: all 14 dimensions or the first 4
 
 The raw experimental result goes as following:
+14 dimensions, 30 speakers, 3 hidden states, 8 mixtures: 43.98%
+14 dimensions, 30 speakers, 3 hidden states, 2 mixtures: 35.38%
+14 dimensions, 30 speakers, 1 hidden states, 8 mixtures: 48.46%
+14 dimensions, 30 speakers, 1 hidden states, 2 mixtures: 41.54%
+14 dimensions, 2 speakers, 3 hidden states, 8 mixtures: 30.77%
+14 dimensions, 2 speakers, 3 hidden states, 2 mixtures: 38.46%
+14 dimensions, 2 speakers, 1 hidden states, 8 mixtures: 35.38%
+14 dimensions, 2 speakers, 1 hidden states, 2 mixtures: 33.85%
+4 dimensions, 30 speakers, 3 hidden states, 8 mixtures: 29.93%
+4 dimensions, 30 speakers, 3 hidden states, 2 mixtures: 27.74%
+4 dimensions, 30 speakers, 1 hidden states, 8 mixtures: 24.09%
+4 dimensions, 30 speakers, 1 hidden states, 2 mixtures: 22.63%
+4 dimensions, 2 speakers, 3 hidden states, 8 mixtures: 22.17%
+4 dimensions, 2 speakers, 3 hidden states, 2 mixtures: 16.33%
+4 dimensions, 2 speakers, 1 hidden states, 8 mixtures: 22.45%
+4 dimensions, 2 speakers, 1 hidden states, 2 mixtures: 16.70%
+
+1) Number of mixtures: Under all scenarios where other three metrics are equal, GMM with 8 mixtures always has better classification performance than that of 2 mixtures. This is similar to the discussion from 2.3 and an expected behavior as 8 mixtures allows the model to represent more sophiscated distribution especially when more than two modals present in the data.
+2) Number of hidden states: Intuitively, an increase in the number of states should improve the model performance as it is able to model more complicated sequential dependencies. However, this is not the case of what we see in the experimental result and it serves as a surprise to us when we see that a single hidden state with 8 mixtures trained on all the data available actually has the best test performance of 48.46%.
+3) Amount of training data used: Under most scenarios, using training data from all 30 speakers generates better performance. This is definitely an expected behavior since the more training data, the more scalable the model will become.
+4) Change to dimensionality: Reducing the dimensionality from 14 to 4 by simply discard the rest 10 dimensions definitely destroys the model performance by a lot since the input data lacks many important information when only the first four dimensions are used.
 
 
 3.3

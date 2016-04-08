@@ -14,8 +14,8 @@ function myTrain(dir_train, max_iter, num_hidden_states, out_folder, M )
     phonemes = struct();
 
     % Iterate through all speaker directories
-    for i=1:size(speakers)
-    %for i=1:4
+    %for i=1:size(speakers)
+    for i=1:6
         % Skip non-speaker directories
         if speakers(i).name(1) == '.'
             continue

@@ -17,12 +17,12 @@ function gmms = gmmTrain( dir_train, max_iter, epsilon, M )
     %                                          (:,:,i) is for i^th mixture
 
     speakers=dir(dir_train);
-    gmms = cell(1,30);  % 30 speakers
+    gmms = cell(1,12);
     index = 1;
 
     % Iterate through all speaker directories
     for i=1:size(speakers)
-    %for i=15:15
+    %for i=1:5
         % Skip non-speaker directories
         if speakers(i).name(1) == '.'
             continue
