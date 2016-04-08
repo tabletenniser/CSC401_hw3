@@ -1,0 +1,151 @@
+File name: unkn_1.flac -- unkn_1.txt
+Translated string: now here is truly a Marvel -- confidence 0.998
+Referecne string : Now here is truly a marvel.
+Edit distance between is 0 => WER is 0.000000
+
+File name: unkn_10.flac -- unkn_10.txt
+Translated string: try every other line first then fill in the interior -- confidence 0.826
+Referecne string : Draw every outer line first, then fill in the interior.
+Edit distance between is 2 => WER is 0.200000
+
+File name: unkn_11.flac -- unkn_11.txt
+Translated string: change involves the displacement of femme -- confidence 0.625
+Referecne string : Change involves the displacement of form.
+Edit distance between is 1 => WER is 0.166667
+
+File name: unkn_12.flac -- unkn_12.txt
+Translated string: to his puzzlement there suddenly was no Hayes -- confidence 0.92
+Referecne string : To his puzzlement, there suddenly was no haze.
+Edit distance between is 1 => WER is 0.125000
+
+File name: unkn_13.flac -- unkn_13.txt
+Translated string: don't ask me to carry read like that -- confidence 0.616
+Referecne string : Don't ask me to carry an oily rag like that.
+Edit distance between is 3 => WER is 0.375000
+
+File name: unkn_14.flac -- unkn_14.txt
+Translated string: full moon shone brightly that night -- confidence 0.996
+Referecne string : The full moon shone brightly that night.
+Edit distance between is 1 => WER is 0.166667
+
+File name: unkn_15.flac -- unkn_15.txt
+Translated string: tug boats a capable of hauling huge loads -- confidence 0.914
+Referecne string : Tugboats are capable of hauling huge loads.
+Edit distance between is 3 => WER is 0.375000
+
+File name: unkn_16.flac -- unkn_16.txt
+Translated string: did dad do academic betting -- confidence 0.695
+Referecne string : Did dad do academic bidding?
+Edit distance between is 1 => WER is 0.200000
+
+File name: unkn_17.flac -- unkn_17.txt
+Translated string: she had your dark suit increase you wash water all year -- confidence 0.736
+Referecne string : She had your dark suit in greasy wash water all year.
+Edit distance between is 2 => WER is 0.181818
+
+File name: unkn_18.flac -- unkn_18.txt
+Translated string: the thick el virus was nearly overwhelmed by Dutch elm disease -- confidence 0.861
+Referecne string : The thick elm forest was nearly overwhelmed by Dutch Elm Disease.
+Edit distance between is 2 => WER is 0.181818
+
+File name: unkn_19.flac -- unkn_19.txt
+Translated string: cop number of teaspoons of soy sauce that you had -- confidence 0.8
+Referecne string : Count the number of teaspoons of soysauce that you add.
+Edit distance between is 5 => WER is 0.500000
+
+File name: unkn_2.flac -- unkn_2.txt
+Translated string: captain features a muskrat and a tadpole -- confidence 0.688
+Referecne string : The cartoon features a muskrat and a tadpole.
+Edit distance between is 2 => WER is 0.285714
+
+File name: unkn_20.flac -- unkn_20.txt
+Translated string: waging sweaters are made of lambs will -- confidence 0.409
+Referecne string : Norwegian sweaters are made of lamb's wool.
+Edit distance between is 3 => WER is 0.428571
+
+File name: unkn_21.flac -- unkn_21.txt
+Translated string: we think differently -- confidence 0.998
+Referecne string : We think differently.
+Edit distance between is 0 => WER is 0.000000
+
+File name: unkn_22.flac -- unkn_22.txt
+Translated string: a toothpaste tube should be squeezed from the bottom -- confidence 0.832
+Referecne string : A toothpaste tube should be squeezed from the bottom.
+Edit distance between is 0 => WER is 0.000000
+
+File name: unkn_23.flac -- unkn_23.txt
+Translated string: ran away a black knight with a lawful wedded man -- confidence 0.802
+Referecne string : Ran away on a black night with a lawful wedded man.
+Edit distance between is 2 => WER is 0.200000
+
+File name: unkn_24.flac -- unkn_24.txt
+Translated string: don't ask me to carry an oily rag like that -- confidence 0.964
+Referecne string : Don't ask me to carry an oily rag like that.
+Edit distance between is 0 => WER is 0.000000
+
+File name: unkn_25.flac -- unkn_25.txt
+Translated string: town asked me to carry an oily rag like that -- confidence 0.817
+Referecne string : Don't ask me to carry an oily rag like that.
+Edit distance between is 2 => WER is 0.200000
+
+File name: unkn_26.flac -- unkn_26.txt
+Translated string: index words and electronic switches may be reserved in the following ways -- confidence 0.93
+Referecne string : Index words and electronic switches may be reserved in the following ways.
+Edit distance between is 0 => WER is 0.000000
+
+File name: unkn_27.flac -- unkn_27.txt
+Translated string: yeah avalanche triggered a minor earthquake -- confidence 0.855
+Referecne string : The avalanche triggered a minor earthquake.
+Edit distance between is 1 => WER is 0.166667
+
+File name: unkn_28.flac -- unkn_28.txt
+Translated string: don't ask me to carry an oily rag like that -- confidence 0.681
+Referecne string : Don't ask me to carry an oily rag like that.
+Edit distance between is 0 => WER is 0.000000
+
+File name: unkn_29.flac -- unkn_29.txt
+Translated string: the thick and Forrest was nearly overwhelmed by Dutch elm disease -- confidence 0.865
+Referecne string : The thick elm forest was nearly overwhelmed by Dutch Elm Disease.
+Edit distance between is 2 => WER is 0.181818
+
+File name: unkn_3.flac -- unkn_3.txt
+Translated string: just let me die in peace -- confidence 0.999
+Referecne string : Just let me die in peace.
+Edit distance between is 0 => WER is 0.000000
+
+File name: unkn_30.flac -- unkn_30.txt
+Translated string: when all else fails use force -- confidence 0.987
+Referecne string : When all else fails, use force.
+Edit distance between is 0 => WER is 0.000000
+
+File name: unkn_4.flac -- unkn_4.txt
+Translated string: the sculptor looked at him bug eyed and amazed angry -- confidence 0.693
+Referecne string : The sculptor looked at him, bugeyed and amazed, angry.
+Edit distance between is 2 => WER is 0.200000
+
+File name: unkn_5.flac -- unkn_5.txt
+Translated string: flash live in the trees as a cricket ball twig in several directions -- confidence 0.826
+Referecne string : A flash illumined the trees as a crooked bolt twigged in several directions.
+Edit distance between is 6 => WER is 0.461538
+
+File name: unkn_6.flac -- unkn_6.txt
+Translated string: this is particularly true in site selection -- confidence 0.956
+Referecne string : This is particularly true in site selection.
+Edit distance between is 0 => WER is 0.000000
+
+File name: unkn_7.flac -- unkn_7.txt
+Translated string: we would lose our export markets and deny ourselves imports we need -- confidence 0.98
+Referecne string : We would lose our export markets and deny ourselves the imports we need.
+Edit distance between is 1 => WER is 0.083333
+
+File name: unkn_8.flac -- unkn_8.txt
+Translated string: continental have teaspoons of soy sauce that you add -- confidence 0.863
+Referecne string : Count the number of teaspoons of soysauce that you add.
+Edit distance between is 6 => WER is 0.666667
+
+File name: unkn_9.flac -- unkn_9.txt
+Translated string: finally he asked do you object to petting -- confidence 0.931
+Referecne string : Finally he asked, do you object to petting?
+Edit distance between is 0 => WER is 0.000000
+
+Average WER is 0.188235
