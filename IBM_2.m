@@ -1,5 +1,5 @@
 lines = textread('Predict.out', '%s', 'delimiter','\n');
-n_speakers = length(fname);
+n_speakers = length(lines);
 
 for speaker_idx=1:n_speakers
     line = strsplit(lines{speaker_idx});

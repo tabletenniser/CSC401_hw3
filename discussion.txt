@@ -25,8 +25,20 @@ The raw experimental result goes as following:
 
 3.3
 =======================
+The overall error rates are computed. SE for example is calculated through #SE_words_total / #Reference_word_total for all utterances
 SE  = 0.1654
 IE  = 0.0500
 DE  = 0.0423
 LEV = 0.2577
+To get the individual error rates, uncomment `% fprintf('Distance: SE=%d, IE=%d, DE=%d, LEV_DIST=%d out of %d\n', se, ie, de, lev_dist, n_words)`
+and rerun `Levenshtein('Testing/hypotheses.txt, 'Testing/')`
 
+4.1
+========================
+A detailed report on WER of recognized transcript is stored in part_4_1.txt.
+The overall WER is 0.188235
+
+4.2
+========================
+Similar to 4.2, a detailed report on WER on all synthesized utterances can be found in part_4_2.txt.
+The overall WER for synthesized utterances is 
