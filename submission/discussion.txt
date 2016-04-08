@@ -1,0 +1,58 @@
+Zexuan Wang (998851883)
+Yiming Kang (998676730)
+
+2.2
+======================
+Using 8 clusters for GMM along with a maximum of 250 iterations for the EM algorithm or per-iteration log likelihood improvement of 0.1, whichever comes first, we are able to recognize the speaker of the 15 labelled .mfcc data with 100% accuracy.
+
+2.3
+======================
+The experiment accuracy goes down as the number of components discreases. This can attribute to the fact that a GMM with few components may not fully describe the distribution of the input .mfcc data. The experimental accuracy goes up when the number of possible speakers, S decreases. This is expected because less potential speakers makes our classification task easier simply by having a smaller number of possible classes. The experiment accuracy goes down as the per-iteration log likelihood threshold episilon increases. Increasing episilon will cause the EM algorithm not finding a best setting that minimizes the log likelihood.
+1) TODO
+2) TODO
+3) TODO
+
+3.2
+======================
+Training with 3 hidden states for HMM and 8 components for GMM with a maximum of 20 iterations provides a phoneme classification accuracy of 43.98%. We then performed experiment under the following possible settings of the four paramters:
+1) Number of mixtures per state: 2 or 8
+2) Number of states per sequence: 1 or 3
+3) Amount of Training data used: 2 speakers or all 30 speakers
+4) Changes to the dimensionality of the data: all 14 dimensions or the first 5
+
+The raw experimental result goes as following:
+
+
+3.3
+=======================
+The overall error rates are computed. SE for example is calculated through #SE_words_total / #Reference_word_total for all utterances
+SE  = 0.1654
+IE  = 0.0500
+DE  = 0.0423
+LEV = 0.2577
+To get the individual error rates, uncomment 
+
+`% fprintf('Distance: SE=%d, IE=%d, DE=%d, LEV_DIST=%d out of %d\n', se, ie, de, lev_dist, n_words)`
+
+and rerun `Levenshtein('Testing/hypotheses.txt, 'Testing/')`
+
+4.1
+========================
+A detailed report on WER of recognized transcript is stored in part_4_1.txt.
+The overall WER is 0.188235
+
+running `IBM('Testing')` would generate the output in part_4_1.txt
+
+4.2
+========================
+Similar to 4.1, a detailed report on WER on all synthesized utterances can be found in part_4_2.txt.
+The overall WER for synthesized utterances is 0.080153
+
+The WER for synthesized utternaces is much lower than that of human speakers, this is possibly due to the fact 
+that humans voice is more diverse and has more variations than synthesized speech, which makes speech recognition
+harder.
+
+running `IBM_2()` generates the output in part_4_2.txt as well as synthesized speech & their transcript under TextToSpeech directory
+
+**NOTE: stderr output of curl will be in printed to the console as well, the actual useful information can be found 
+towards the very end
