@@ -26,7 +26,7 @@ for file_idx = 1:n_flac
     transcript = strtrim(transcript{:});
     fprintf('Translated string: %s with confidence %s\n', transcript, confidence);
     [xxx1, xxx2, hypothesis] = textread(['Testing/', text_files(file_idx).name], '%d %d %s', 'delimiter','\n');
-    [SE, IE, DE, LEV_DIST, N_HYP] = edit_distance(hypothesis, transcript);
-    fprintf('Edit distance between %s and %s is %d\n', hypothesis, transcript, LEV_DIST);
-
+    fprintf('Edit distance between %s and %s \n', hypothesis{:}, transcript);
+    [SE, IE, DE, LEV_DIST, N_HYP] = edit_distance(hypothesis{:}, transcript);
+    fprintf('is %d \n', LEV_DIST);
 end
