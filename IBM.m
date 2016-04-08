@@ -16,12 +16,12 @@ for file_idx = 1:n_flac
     fprintf('File name: %s -- %s\n', flac_files(file_idx).name,  text_files(file_idx).name)
     % Do some stuff
     cmd = ['env LD_LIBRARY_PATH="" curl -u 2b78670c-c890-477b-a54b-a4caeb27ad0e:JJgGDcOVXKxB -X POST --header "Content-Type: audio/flac" --header "Transfer-Encoding: chunked" --data-binary @Testing/', flac_files(file_idx).name, ' "https://stream.watsonplatform.net/speech-to-text/api/v1/recognize?continuous=true"'];
-    fprintf('CMD = %s\n', cmd);
+    %fprintf('CMD = %s\n', cmd);
     [x, y] = unix(cmd);
     fprintf('IBM result: %s\n', y);
     confidence = regexp(y, '"confidence": (\d+\.\d+)', 'tokens');
-    transcript = regexp(y, '"transcript": "([^"]+)"');
+    transcript = regexp(y, '"transcript": "([^"]+)"', 'tokens');
     confidence = confidence{1};
     transcript = transcript{1};
-    fprintf('Translated string: %s\n', transcript);
+    fprintf('Translated string: %s with confidence %s\n', transcript{:}, confidence{:});
 end
