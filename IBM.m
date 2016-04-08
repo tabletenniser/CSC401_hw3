@@ -22,6 +22,8 @@ for file_idx = 1:n_flac
     confidence = regexp(y, '"confidence": (\d+\.\d+)', 'tokens');
     transcript = regexp(y, '"transcript": "([^"]+)"', 'tokens');
     confidence = confidence{1};
+    confidence = strtrim(confidence{:});
     transcript = transcript{1};
-    fprintf('Translated string: %s with confidence %s\n', transcript{:}, confidence{:});
+    transcript = strtrim(transcript{:});
+    fprintf('Translated string: %s with confidence %s\n', transcript, confidence);
 end
