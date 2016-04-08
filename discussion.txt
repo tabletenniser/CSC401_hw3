@@ -21,3 +21,12 @@ Training with 3 hidden states for HMM and 8 components for GMM with a maximum of
 4) Changes to the dimensionality of the data: all 14 dimensions or the first 5
 
 The raw experimental result goes as following:
+
+
+3.3
+=======================
+SE  = 0.1654
+IE  = 0.0500
+DE  = 0.0423
+LEV = 0.2577
+
