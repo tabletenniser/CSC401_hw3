@@ -35,6 +35,7 @@ for text_file=text_files'
     total_words = total_words + n_words;
 end
 
+% total_words is the number of words in REFERENCE TEXT
 DE = DE / total_words;
 SE = SE / total_words;
 IE = IE / total_words;

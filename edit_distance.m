@@ -13,7 +13,7 @@ function [SE, IE, DE, LEV_DIST, N_HYP] = edit_distance(hypothesis, actual)
     hypothesis = strsplit(hypothesis, ' ');
     hypothesis = ['_', hypothesis];
     
-    N_HYP = length(hypothesis) - 1;
+    N_HYP = length(actual) - 1;
     
     % init distances to inf, dist(1,1) is 0
     distance_mat = inf(length(actual), length(hypothesis));
