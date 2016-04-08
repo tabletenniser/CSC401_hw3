@@ -1,5 +1,5 @@
 Zexuan Wang (998851883)
-Yiming Kang (998676130)
+Yiming Kang (998676730)
 
 2.2
 ======================
@@ -30,7 +30,10 @@ SE  = 0.1654
 IE  = 0.0500
 DE  = 0.0423
 LEV = 0.2577
-To get the individual error rates, uncomment `% fprintf('Distance: SE=%d, IE=%d, DE=%d, LEV_DIST=%d out of %d\n', se, ie, de, lev_dist, n_words)`
+To get the individual error rates, uncomment 
+
+`% fprintf('Distance: SE=%d, IE=%d, DE=%d, LEV_DIST=%d out of %d\n', se, ie, de, lev_dist, n_words)`
+
 and rerun `Levenshtein('Testing/hypotheses.txt, 'Testing/')`
 
 4.1
@@ -38,7 +41,18 @@ and rerun `Levenshtein('Testing/hypotheses.txt, 'Testing/')`
 A detailed report on WER of recognized transcript is stored in part_4_1.txt.
 The overall WER is 0.188235
 
+running `IBM('Testing')` would generate the output in part_4_1.txt
+
 4.2
 ========================
-Similar to 4.2, a detailed report on WER on all synthesized utterances can be found in part_4_2.txt.
-The overall WER for synthesized utterances is 
+Similar to 4.1, a detailed report on WER on all synthesized utterances can be found in part_4_2.txt.
+The overall WER for synthesized utterances is 0.080153
+
+The WER for synthesized utternaces is much lower than that of human speakers, this is possibly due to the fact 
+that humans voice is more diverse and has more variations than synthesized speech, which makes speech recognition
+harder.
+
+running `IBM_2()` generates the output in part_4_2.txt as well as synthesized speech & their transcript under TextToSpeech directory
+
+**NOTE: stderr output of curl will be in printed to the console as well, the actual useful information can be found 
+towards the very end
