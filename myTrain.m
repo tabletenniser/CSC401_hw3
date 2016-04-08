@@ -25,13 +25,15 @@ function myTrain(dir_train, max_iter, num_hidden_states, out_folder, M )
         speaker_mfccs = dir([speaker_dir, filesep, '*.mfcc']);
 
         % Iterate through all training data under current speaker
-        %for j=1:size(speaker_mfccs)
-        for j=1:5
+        for j=1:size(speaker_mfccs)
+        %for j=1:5
             mfcc_file = speaker_mfccs(j).name;
             phn_file = strrep(mfcc_file, 'mfcc', 'phn');
 
             % Load mfcc data
             mfcc_data = load(fullfile(dir_train, speakers(i).name, mfcc_file));
+            % Reduce feature to the first 4
+            mfcc_data = mfcc_data(:,1:4);
 
             % Read phoneme data for this speaker's utterance
             [phn_starts, phn_ends, phns] = textread(fullfile(dir_train, speakers(i).name, phn_file), '%d %d %s', 'delimiter','\n');

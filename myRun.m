@@ -11,13 +11,15 @@ function myRun(testDir, hmmDir)
     addpath(genpath('./FullBNT'));
 
     % Iterate through all testing phonemes
-    %for i=1:length(phonemes)
-    for i = 1:4
+    for i=1:length(phonemes)
+    %for i = 1:4
         phn_file = phonemes(i).name
         mfcc_file = strrep(phn_file, 'phn', 'mfcc');
         
         % Read MFCC data
         mfcc_data = load([testDir, filesep, mfcc_file]);
+        % Reduce feature to the first 4
+        mfcc_data = mfcc_data(:,1:4);
 
          % Read phoneme data
         [phn_starts, phn_ends, phns] = textread(fullfile(testDir, phn_file), '%d %d %s', 'delimiter','\n');
