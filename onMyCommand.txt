@@ -1,1 +1,0 @@
-curl -u 07607d3a-37e9-4ec3-a8f8-700b58161832:dT3swy0NpmV3 -X POST --header "Content-Type: application/json" --header "Accept: audio/flac" --header "Voice: en-US_LisaVoice" --data "{\"text\":\"$@\"}" "https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize" ${@: -1}    
